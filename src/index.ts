@@ -41,8 +41,6 @@ async function main() {
       return
     }
 
-    console.log(tweet.data.entities)
-
     if (tweet.data.in_reply_to_user_id === meAsUser.id_str) {
       onReplyToMe(tweet.data, settings)
     } else if (tweet.data.entities?.mentions?.some(m => m.username === meAsUser.screen_name)) {
@@ -61,6 +59,12 @@ async function main() {
   }
 
   async function onCaVa(tweet: TweetV2) {
+    const allowed = ['ca va', 'ça va', 'sa va']
+    if (!allowed.includes(tweet.text.toLowerCase())) {
+      // sometimes, replies to ca va tweets are included
+      return
+    }
+
     console.log(`Will reply ça vax to ${tweet.id} (https://twitter.com/i/statuses/${tweet.id}): ${tweet.text}`)
     // await client.v1.reply('Ça va ? Ça vax !!', tweet.id)
   }
