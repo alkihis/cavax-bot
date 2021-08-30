@@ -1,4 +1,4 @@
-import { TwitterApi } from 'twitter-api-v2'
+import { TweetV2SingleStreamResult, TwitterApi } from 'twitter-api-v2'
 import fs from 'fs'
 import readline from 'readline'
 import dotenv from 'dotenv'
@@ -8,6 +8,7 @@ const settingsPath = __dirname + '/../assets/settings.json'
 
 export interface ISettings {
   banned: string[]
+  usernamesWhitelist: false | string[]
 }
 
 export async function getSettings() {
@@ -68,4 +69,15 @@ function readNextLineFromStdin() {
     })
     liner.on('close', reject)
   })
+}
+
+export function isPresentInWhitelist(settings: ISettings, tweet: TweetV2SingleStreamResult) {
+  if (!settings.usernamesWhitelist) {
+    return true
+  }
+
+  const authorId = tweet.data.author_id!
+  const user = tweet.includes!.users!.find(u => u.id === authorId)
+
+  return !!(user && settings.usernamesWhitelist.includes(user.username.toLowerCase()))
 }
