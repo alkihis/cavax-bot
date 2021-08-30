@@ -7,6 +7,7 @@ A simple bot answering "ça vax" to users who tweet "ça va" (or similar). [see 
 - Copy `.env.dist` to `.env` and complete `.env` file with your credentials.
 - Copy `assets/settings.dist.json` to `assets/settings.json`
 - Install packages
+- Compile TypeScript
 - Start `node dist/index.js`
 
 ## Misc
