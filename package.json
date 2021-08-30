@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^16.7.7",
+    "dotenv": "^10.0.0",
+    "twitter-api-v2": "^1.4.0"
+  }
 }

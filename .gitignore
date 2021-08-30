@@ -1,0 +1,4 @@
+dist/
+assets/settings.json
+.env
+node_modules
